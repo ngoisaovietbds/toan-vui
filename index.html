@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#8fd3f4">
+<title>Toán Vui Cùng Bố Mẹ</title>
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+<!-- Màn chính -->
+<section id="manChinh" class="man hien">
+  <button class="so-ca so-ca-chinh" aria-label="Cửa hàng">🐟 <b>0</b></button>
+  <button class="nut-am" id="nutAm" aria-label="Bật tắt âm thanh">🔊</button>
+  <button class="nut-bo-me" id="nutBoMe" aria-label="Góc bố mẹ">👪 Bố mẹ</button>
+  <h1 class="tieu-de">Toán Vui<br><span>Cùng Bố Mẹ</span></h1>
+  <div class="linh-vat" id="linhVat"></div>
+  <div class="luoi-mon">
+    <button class="the-mon mo" data-mon="xephang"><b>🐧</b><span>Xếp hàng</span></button>
+    <button class="the-mon mo" data-mon="dem"><b>🐟</b><span>Đếm</span></button>
+    <button class="the-mon mo" data-mon="lonbe"><b>⚖️</b><span>Lớn – bé</span></button>
+    <button class="the-mon mo" data-mon="sothieu"><b>❓</b><span>Số còn thiếu</span></button>
+    <button class="the-mon mo" data-mon="congtru"><b>➕</b><span>Cộng trừ</span></button>
+    <button class="the-mon mo" data-mon="nhanchia"><b>✖️</b><span>Nhân chia</span></button>
+  </div>
+  <div class="luoi-mon">
+    <button class="the-mon cung" id="nutRaDe"><b>✏️</b><span>Bố mẹ ra đề</span></button>
+    <button class="the-mon cung" id="nutDoiKhang"><b>🤝</b><span>Đối kháng</span></button>
+    <button class="the-mon cung" id="nutCuaHang"><b>🛍️</b><span>Cửa hàng</span></button>
+    <button class="the-mon cung" id="nutHocCach"><b>📏</b><span>Học cách tính</span></button>
+    <button class="the-mon cung" id="nutNhaBang"><b>🏠</b><span>Nhà tuyết</span></button>
+  </div>
+
+  <p class="chan-trang">Bản lát 12 · 0.10.4</p>
+</section>
+
+<!-- Chọn cấp -->
+<section id="manCap" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="manChinh" aria-label="Quay lại">⬅</button>
+    <h2>Cánh cụt xếp hàng</h2>
+  </div>
+  <p class="loi-dan">Chạm vào 2 bạn đứng cạnh nhau để đổi chỗ. Đổi ít lần thì được nhiều sao!</p>
+  <div class="danh-sach-cap" id="dsCap"></div>
+</section>
+
+<!-- Chơi -->
+<section id="manChoi" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="manCap" aria-label="Quay lại">⬅</button>
+    <div class="cham-van" id="chamVan"></div>
+    <div class="dem-luot">Đổi: <b id="soLuot">0</b></div>
+  </div>
+  <p class="loi-dan lon" id="deBai">Xếp các bạn từ bé đến lớn nhé!</p>
+  <div class="san" id="san">
+    <div class="tang-bang"></div>
+    <div id="hang"></div>
+    <div class="mui-ten-goi-y" id="muiTen">⇄</div>
+  </div>
+  <p class="goi-y-xoay" id="goiYXoay">📱↻ Xoay ngang máy để các bạn to hơn nhé</p>
+  <div class="huong" id="huong"><span>Bé</span><i></i><span>Lớn</span></div>
+  <p class="nhan-xet" id="nhanXet"></p>
+  <div class="hang-nut">
+    <button class="nut phu" id="nutGoiY">💡 Gợi ý</button>
+    <button class="nut phu" id="nutLamLai">↺ Xếp lại từ đầu</button>
+  </div>
+</section>
+
+<!-- Chọn cấp của màn hỏi–đáp (Đếm, Lớn–bé, Số còn thiếu) -->
+<section id="manCapHoi" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="manChinh" aria-label="Quay lại">⬅</button>
+    <h2 id="tenMonHoi"></h2>
+  </div>
+  <p class="loi-dan" id="loiDanMonHoi"></p>
+  <div class="danh-sach-cap" id="dsCapHoi"></div>
+</section>
+
+<!-- Chơi màn hỏi–đáp -->
+<section id="manHoi" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="manCapHoi" aria-label="Quay lại">⬅</button>
+    <div class="cham-van cham-hoi" id="chamHoi"></div>
+    <button class="nut-cach-lam" id="nutCachLam" style="display:none" aria-label="Xem cách làm">💡<span> Cách làm</span></button>
+    <div class="so-ca dem-luot">🐟 <b>0</b></div>
+  </div>
+  <p class="loi-dan lon" id="deHoi"></p>
+  <div class="san-hoi" id="sanHoi"></div>
+  <p class="nhan-xet" id="nhanXetHoi"></p>
+  <div class="dap-an" id="dapAnHoi"></div>
+  <div class="linh-vat-nho" id="linhVatHoi"></div>
+</section>
+
+<!-- Bố mẹ ra đề -->
+<section id="manRaDe" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="cha" aria-label="Quay lại">⬅</button>
+    <h2>Bố mẹ ra đề</h2>
+  </div>
+  <div class="hang-tab"><button class="chip" id="tabPhepTinh">➕ Phép tính</button><button class="chip" id="tabDaySo">🐧 Dãy số xếp hàng</button></div>
+  <div class="khung-ra-de" id="khungPhepTinh">
+    <p class="ph-ghi">Gõ phép tính, bấm "Thêm câu". Ra tối đa 10 câu rồi đưa máy cho con giải.</p>
+    <div class="man-hinh-so" id="manHinhPt"></div>
+    <div class="ban-phim bon-cot" id="phimPhepTinh"></div>
+    <div class="hang-nut"><button class="nut phu" id="nutThemCau">➕ Thêm câu</button></div>
+    <div class="ds-de" id="dsDeBoMe"></div>
+    <div class="hang-nut"><span class="dem-de" id="demDeBoMe"></span><button class="nut chinh" id="nutGiaiDe">Đưa con giải ▶</button></div>
+  </div>
+  <div class="khung-ra-de" id="khungDaySo">
+    <p class="ph-ghi">Gõ từ 3 đến 8 số, cách nhau bằng dấu phẩy. Con sẽ xếp các bạn cánh cụt đeo các số này.</p>
+    <div class="man-hinh-so" id="manHinhDay"></div>
+    <div class="ban-phim" id="phimDaySo"></div>
+    <div class="hang-tab"><button class="chip" id="chieuTang">Bé → lớn</button><button class="chip" id="chieuGiam">Lớn → bé</button></div>
+    <div class="hang-nut"><button class="nut chinh" id="nutXepDay">Đưa con xếp ▶</button></div>
+  </div>
+</section>
+
+<!-- Đối kháng 2 người -->
+<section id="manDoiKhang" class="man">
+  <div id="dkCaiDat" class="dk-cai-dat">
+    <div class="thanh-tren">
+      <button class="nut-ve" data-ve="cha" aria-label="Quay lại">⬅</button>
+      <h2>Đối kháng 2 người</h2>
+    </div>
+    <p class="loi-dan">Đặt máy nằm giữa. Con ngồi phía dưới, bố mẹ ngồi phía đối diện. Ai chọn đúng trước thì được điểm!</p>
+    <h3>Chơi môn gì?</h3><div class="hang-tab" id="dkChonMon"></div>
+    <h3>Cấp của con</h3><div class="hang-tab" id="dkChonCap"></div>
+    <p class="ph-ghi" id="dkGhiCap"></p>
+    <div class="hang-nut"><button class="nut chinh" id="dkBatDau">Bắt đầu ▶</button></div>
+  </div>
+  <div id="dkChoi" class="dk-choi" style="display:none">
+    <div class="dk-nua dk-tren" id="dkTren"></div>
+    <div class="dk-giua"><button class="nut-ve" data-ve="cha" aria-label="Dừng">✕</button><span id="dkLuot"></span></div>
+    <div class="dk-nua dk-duoi" id="dkDuoi"></div>
+  </div>
+</section>
+
+<!-- Cửa hàng phụ kiện -->
+<section id="manCuaHang" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="cha" aria-label="Quay lại">⬅</button>
+    <h2>Cửa hàng</h2>
+    <div class="so-ca dem-luot" style="margin-left:auto">🐟 <b id="caCuaHang">0</b></div>
+  </div>
+  <div class="cua-hang">
+    <div class="xem-truoc"><div class="xem-truoc-cc" id="xemTruocCc"></div><p class="loi-cua-hang" id="loiCuaHang"></p></div>
+    <div class="cot-do">
+      <div class="hang-tab" id="tabShop"></div>
+      <div class="hang-nut"><button class="nut chinh" id="nutVaoNha" style="display:none">🏠 Vào Nhà tuyết để đặt đồ</button></div>
+      <div class="ds-do" id="dsDo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 🏠 Nhà tuyết (lát 12) -->
+<section id="manNhaBang" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="cha" aria-label="Quay lại">⬅</button>
+    <h2>🏠 Nhà tuyết</h2>
+    <button class="nut phu nho" id="nutMuaDoNha" style="margin-left:auto">🛍️ Mua đồ</button>
+    <div class="so-ca dem-luot">🐟 <b>0</b></div>
+  </div>
+  <div class="canh-nha" id="canhNha"></div>
+  <p class="loi-nha" id="loiNha"></p>
+  <div class="kho-nha" id="khoNha"></div>
+</section>
+
+<!-- ⚡ Phản xạ nhanh (lát 11) -->
+<section id="manPhanXa" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="cha" aria-label="Quay lại">⬅</button>
+    <h2>⚡ Phản xạ nhanh</h2>
+    <div class="dem-luot" style="margin-left:auto">⏱ <b id="pxGiay">60</b>s</div>
+  </div>
+  <div class="px-dong-ho"><i id="pxDongHo"></i></div>
+  <p class="px-diem">Đúng: <b id="pxDiem">0</b> · Kỷ lục: <b id="pxKyLuc">0</b></p>
+  <div class="px-de" id="pxDe"></div>
+  <div class="dap-an" id="pxDapAn"></div>
+</section>
+
+<!-- Góc bố mẹ -->
+<section id="manPhuHuynh" class="man">
+  <div class="thanh-tren">
+    <button class="nut-ve" data-ve="manChinh" aria-label="Quay lại">⬅</button>
+    <h2>Góc bố mẹ</h2>
+  </div>
+  <div class="cac-the-ph">
+    <div class="the-ph"><h3>⏱ Thời gian chơi</h3><div id="phThoiGian"></div></div>
+    <div class="the-ph"><h3>📊 Kết quả từng màn</h3><div id="phKetQua"></div></div>
+    <div class="the-ph"><h3>🎚 Chỉnh cấp đã mở</h3><p class="ph-ghi">Mở sẵn cấp cao hơn nếu bé đã biết, hoặc hạ xuống để bé ôn lại.</p><div id="phChinhCap"></div></div>
+    <div class="the-ph"><h3>⚙️ Cài đặt</h3><div id="phCaiDat"></div></div>
+    <div class="the-ph nguy-hiem"><h3>🗑 Xoá tiến độ</h3><p class="ph-ghi">Xoá hết sao, cá, phụ kiện và cấp đã mở của bé. Thời gian chơi hôm nay vẫn giữ. Không lấy lại được.</p>
+      <button class="nut phu" id="nutXoaTienDo">Xoá tiến độ</button></div>
+  </div>
+</section>
+
+<!-- Câu hỏi cho bố mẹ (khoá trẻ em) -->
+<div class="phu-man" id="cuaBoMe">
+  <div class="hop-thang hop-bo-me">
+    <h2>Câu hỏi cho bố mẹ</h2>
+    <p id="cauBoMe"></p>
+    <div class="o-nhap" id="oNhapBoMe"></div>
+    <div class="ban-phim" id="banPhimBoMe"></div>
+    <button class="nut phu" id="nutHuyBoMe">Đóng</button>
+  </div>
+</div>
+
+<!-- Hết giờ chơi -->
+<div class="phu-man het-gio" id="manHetGio">
+  <div class="hop-thang">
+    <div class="cc-ngu" id="ccNgu"></div>
+    <h2>Nghỉ mắt thôi!</h2>
+    <p id="loiHetGio"></p>
+    <button class="nut phu" id="nutMoThem">👪 Bố mẹ mở thêm 10 phút</button>
+  </div>
+</div>
+<div class="nhac-gio" id="nhacGio"></div>
+
+<!-- Cách làm cộng trừ (trục số, tách tròn chục, que tính) -->
+<div class="phu-man cach-lam" id="cachLam">
+  <div class="hop-cach">
+    <h2 id="tieuDeCach"></h2>
+    <div class="hang-tab" id="tabCach"></div>
+    <div class="vung-cach" id="vungCach"></div>
+    <p class="loi-cach" id="loiCach"></p>
+    <div class="hang-nut">
+      <button class="nut chinh" id="nutBuocTiep">Bước tiếp ▶</button>
+      <button class="nut phu" id="nutLamMau">▶ Làm mẫu</button>
+      <button class="nut phu" id="nutLamLaiCach">↺</button>
+      <button class="nut phu" id="nutViDuKhac">🎲 Ví dụ khác</button>
+      <button class="nut phu" id="nutHieuRoi">✔ Con hiểu rồi</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bảng thắng -->
+<div class="phu-man" id="bangThang">
+  <div class="hop-thang">
+    <h2 id="loiKhen">Giỏi quá!</h2>
+    <div class="sao-thang" id="saoThang"><span>★</span><span>★</span><span>★</span></div>
+    <p id="chiTietThang"></p>
+    <div class="hang-nut">
+      <button class="nut phu" id="nutChonCap">Chọn cấp</button>
+      <button class="nut chinh" id="nutTiep">Ván tiếp ▶</button>
+    </div>
+  </div>
+</div>
+
+<div id="phaoGiay"></div>
+<script src="game.js"></script>
+<script src="hoi.js"></script>
+<script src="phuhuynh.js"></script>
+<script src="choicung.js"></script>
+<script src="cuahang.js"></script>
+<script src="cachlam.js"></script>
+<script src="luyen.js"></script>
+<script src="giong/cau-doc.js"></script>
+<script src="giong/co-san.js"></script>
+<script src="giong.js"></script>
+</body>
+</html>
