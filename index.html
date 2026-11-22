@@ -269,6 +269,7 @@
   // Bản web: lưu sẵn game trên máy để chơi khi không có mạng. Trong APK (file://) thì bỏ qua.
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
     window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {});   // xin trình duyệt đừng tự xoá cá, đồ của bé
   }
 </script>
 </body>
