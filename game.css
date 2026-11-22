@@ -739,3 +739,13 @@ button.so-ca-chinh { cursor: pointer; }
 
 /* 0.10.4: món sát mép phải thì nút ✕ lùi vào trong, không bị khuất */
 .cat-vat.cat-trong { right: 2px; }
+
+/* 0.10.5: tên bé ở màn đầu và ô nhập trong Góc bố mẹ */
+.ten-be-chinh { margin: 2px 0 0; text-align: center; font-weight: 900; font-size: clamp(16px, 3.4vw, 24px); color: #b3306b;
+  background: rgba(255,255,255,.75); border-radius: 999px; padding: 2px 14px; align-self: center; }
+.ten-be-chinh[hidden] { display: none; }
+.hang-ten-be { display: flex; gap: 8px; align-items: center; }
+.hang-ten-be input { flex: 1; min-width: 0; font: inherit; font-weight: 800; font-size: 18px; padding: 8px 12px; border-radius: 12px;
+  border: 2px solid #b9dcef; background: #fff; color: #16324f; }
+.hang-ten-be input:focus { outline: none; border-color: #ff5c8a; }
+@media (max-height: 480px) { .ten-be-chinh { font-size: 14px; margin: 0; padding: 0 10px; } }

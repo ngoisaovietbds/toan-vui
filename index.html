@@ -22,6 +22,7 @@
   <button class="nut-am" id="nutAm" aria-label="Bật tắt âm thanh">🔊</button>
   <button class="nut-bo-me" id="nutBoMe" aria-label="Góc bố mẹ">👪 Bố mẹ</button>
   <h1 class="tieu-de">Toán Vui<br><span>Cùng Bố Mẹ</span></h1>
+  <p class="ten-be-chinh" id="tenBeChinh" hidden></p>
   <div class="linh-vat" id="linhVat"></div>
   <div class="luoi-mon">
     <button class="the-mon mo" data-mon="xephang"><b>🐧</b><span>Xếp hàng</span></button>
@@ -39,7 +40,7 @@
     <button class="the-mon cung" id="nutNhaBang"><b>🏠</b><span>Nhà tuyết</span></button>
   </div>
 
-  <p class="chan-trang">Bản lát 12 · 0.10.4</p>
+  <p class="chan-trang">Bản lát 12 · 0.10.5</p>
 </section>
 
 <!-- Chọn cấp -->
@@ -196,8 +197,10 @@
     <div class="the-ph"><h3>⏱ Thời gian chơi</h3><div id="phThoiGian"></div></div>
     <div class="the-ph"><h3>📊 Kết quả từng màn</h3><div id="phKetQua"></div></div>
     <div class="the-ph"><h3>🎚 Chỉnh cấp đã mở</h3><p class="ph-ghi">Mở sẵn cấp cao hơn nếu bé đã biết, hoặc hạ xuống để bé ôn lại.</p><div id="phChinhCap"></div></div>
+    <div class="the-ph"><h3>🎀 Tên bé</h3><p class="ph-ghi">Tên hiện ở màn đầu game. Để trống thì không hiện.</p>
+      <div class="hang-ten-be"><input type="text" id="oTenBe" maxlength="16" placeholder="Ví dụ: Na" autocomplete="off"><button class="nut chinh nho" id="nutLuuTenBe">Lưu</button></div></div>
     <div class="the-ph"><h3>⚙️ Cài đặt</h3><div id="phCaiDat"></div></div>
-    <div class="the-ph nguy-hiem"><h3>🗑 Xoá tiến độ</h3><p class="ph-ghi">Xoá hết sao, cá, phụ kiện và cấp đã mở của bé. Thời gian chơi hôm nay vẫn giữ. Không lấy lại được.</p>
+    <div class="the-ph nguy-hiem"><h3>🗑 Xoá tiến độ</h3><p class="ph-ghi">Xoá hết sao, cá, phụ kiện và cấp đã mở của bé. Tên bé và thời gian chơi hôm nay vẫn giữ. Không lấy lại được.</p>
       <button class="nut phu" id="nutXoaTienDo">Xoá tiến độ</button></div>
   </div>
 </section>

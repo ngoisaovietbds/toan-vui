@@ -116,8 +116,27 @@
 
   // ---------- Màn Góc bố mẹ ----------
   TV.khiMoMan.manPhuHuynh = veGocBoMe;
+  // Tên bé (0.10.5): bố mẹ gõ ở đây, hiện ở màn đầu "Của bé Na"
+  function veTenBe() {
+    var ten = (TV.beHienTai().ten || '').trim(), el = $('tenBeChinh');
+    el.textContent = ten ? '🎀 Của bé ' + ten : '';
+    el.hidden = !ten;
+  }
+  TV.veTenBe = veTenBe;
+  veTenBe();
+  var moChinhPh = TV.khiMoMan.manChinh;
+  TV.khiMoMan.manChinh = function () { if (moChinhPh) moChinhPh(); veTenBe(); };
+  function luuTenBe() {
+    var ten = $('oTenBe').value.replace(/\s+/g, ' ').trim().slice(0, 16);
+    TV.beHienTai().ten = ten; TV.ghiLuu(); veTenBe();
+    $('oTenBe').value = ten; $('oTenBe').blur();
+    am('chon'); TV.hieuUng($('nutLuuTenBe'), 'nhay-len', 500);
+  }
+  $('nutLuuTenBe').addEventListener('click', luuTenBe);
+  $('oTenBe').addEventListener('keydown', function (e) { if (e.key === 'Enter') luuTenBe(); });
   function veGocBoMe() {
     var be = TV.beHienTai(), cd = TV.luu().caiDat;
+    $('oTenBe').value = be.ten || '';
     // Thời gian 7 ngày
     var hom = new Date(), cot = '', max = 1, ds = [];
     for (var i = 6; i >= 0; i--) {
@@ -191,7 +210,7 @@
       return;
     }
     var L = TV.luu(), beCu = L.be[L.beDangChoi];
-    L.be[L.beDangChoi] = { ten: '', mon: {}, thoiGian: beCu.thoiGian, themPhut: beCu.themPhut };
+    L.be[L.beDangChoi] = { ten: beCu.ten || '', mon: {}, thoiGian: beCu.thoiGian, themPhut: beCu.themPhut };
     TV.chuanHoa(L);
     TV.ghiLuu();
     datLaiNutXoa();
