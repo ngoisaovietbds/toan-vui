@@ -40,7 +40,7 @@
     <button class="the-mon cung" id="nutNhaBang"><b>🏠</b><span>Nhà tuyết</span></button>
   </div>
 
-  <p class="chan-trang">Bản lát 12 · 0.10.5</p>
+  <p class="chan-trang">Bản lát 13 · 0.11.0</p>
 </section>
 
 <!-- Chọn cấp -->
@@ -194,6 +194,8 @@
     <h2>Góc bố mẹ</h2>
   </div>
   <div class="cac-the-ph">
+    <div class="the-ph ban-moi" id="phBanMoi" hidden><h3>📲 Có bản app mới</h3><p class="ph-ghi" id="phBanMoiChu"></p>
+      <button class="nut chinh" id="nutTaiBanMoi">Tải về</button></div>
     <div class="the-ph"><h3>⏱ Thời gian chơi</h3><div id="phThoiGian"></div></div>
     <div class="the-ph"><h3>📊 Kết quả từng màn</h3><div id="phKetQua"></div></div>
     <div class="the-ph"><h3>🎚 Chỉnh cấp đã mở</h3><p class="ph-ghi">Mở sẵn cấp cao hơn nếu bé đã biết, hoặc hạ xuống để bé ôn lại.</p><div id="phChinhCap"></div></div>
@@ -258,6 +260,18 @@
 </div>
 
 <div id="phaoGiay"></div>
+<script>
+  // APK 0.11.0 chép tiến độ cũ sang qua địa chỉ #nhap=...; chỉ nhận khi máy này chưa có dữ liệu (đặc tả mục 13)
+  (function () {
+    var h = location.hash;
+    if (h.indexOf('#nhap=') !== 0) return;
+    try {
+      var v = decodeURIComponent(h.slice(6));
+      if (!localStorage.getItem('toanvui.v1') && v && typeof JSON.parse(v) === 'object') localStorage.setItem('toanvui.v1', v);
+    } catch (e) {}
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  })();
+</script>
 <script src="game.js"></script>
 <script src="hoi.js"></script>
 <script src="phuhuynh.js"></script>

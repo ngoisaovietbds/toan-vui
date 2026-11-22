@@ -116,6 +116,24 @@
 
   // ---------- Màn Góc bố mẹ ----------
   TV.khiMoMan.manPhuHuynh = veGocBoMe;
+  // Bản APK mới (0.11.0, đặc tả mục 13): APK gắn "ToanVuiApk/<số bản>" vào user agent. Bản web không hiện gì vì đã tự cập nhật.
+  var banMoi = null;
+  function kiemTraBanMoi() {
+    var m = navigator.userAgent.match(/ToanVuiApk\/(\d+)/);
+    if (!m || !/^https?:$/.test(location.protocol) || !window.fetch) return;   // bản đóng gói (file://) thì bỏ qua
+    fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (!j || !(+j.ma > +m[1]) || !/^https:\/\/github\.com\/ngoisaovietbds\//.test(j.tai || '')) return;
+      banMoi = j;
+      $('nutBoMe').classList.add('co-moi');
+      veBanMoi();
+    }).catch(function () {});
+  }
+  function veBanMoi() {
+    $('phBanMoi').hidden = !banMoi;
+    if (banMoi) $('phBanMoiChu').textContent = 'Bản ' + banMoi.ten + ' đã có. Bấm Tải về, trình duyệt sẽ mở trang tải. Tải xong mở file để cài đè, cá, đồ, sao của bé vẫn giữ.';
+  }
+  $('nutTaiBanMoi').addEventListener('click', function () { if (banMoi) { am('bam'); location.href = banMoi.tai; } });
+  kiemTraBanMoi();
   // Tên bé (0.10.5): bố mẹ gõ ở đây, hiện ở màn đầu "Của bé Na"
   function veTenBe() {
     var ten = (TV.beHienTai().ten || '').trim(), el = $('tenBeChinh');
@@ -137,6 +155,7 @@
   function veGocBoMe() {
     var be = TV.beHienTai(), cd = TV.luu().caiDat;
     $('oTenBe').value = be.ten || '';
+    veBanMoi();
     // Thời gian 7 ngày
     var hom = new Date(), cot = '', max = 1, ds = [];
     for (var i = 6; i >= 0; i--) {

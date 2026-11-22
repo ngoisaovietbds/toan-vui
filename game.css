@@ -749,3 +749,10 @@ button.so-ca-chinh { cursor: pointer; }
   border: 2px solid #b9dcef; background: #fff; color: #16324f; }
 .hang-ten-be input:focus { outline: none; border-color: #ff5c8a; }
 @media (max-height: 480px) { .ten-be-chinh { font-size: 14px; margin: 0; padding: 0 10px; } }
+
+/* 0.11.0: báo bản APK mới (chỉ trong Góc bố mẹ, chấm đỏ trên nút Bố mẹ) */
+.nut-bo-me.co-moi { position: relative; }
+.nut-bo-me.co-moi::after { content: ""; position: absolute; top: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%;
+  background: #e0245e; box-shadow: 0 0 0 2px #fff; }
+.the-ph.ban-moi { background: #fff7d6; box-shadow: 0 4px 0 #e0c060; }
+.the-ph[hidden] { display: none; }
